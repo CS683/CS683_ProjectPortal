@@ -51,7 +51,7 @@ public class ProjectDetailFragment extends Fragment {
         favCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isFav) {
-                Project.projects[projectId].setFavorite(isFav);
+                Project.projects.get(projectId).setFavorite(isFav);
             }
         });
 
@@ -78,10 +78,11 @@ public class ProjectDetailFragment extends Fragment {
     //make sure all fields display the correct project information
     public void setProject(int projId) {
         projectId = projId;
-        titleTextView.setText(Project.projects[projectId].getTitle());
-        summaryTextView.setText(Project.projects[projectId].getSummary());
-        favCheckBox.setChecked(Project.projects[projectId].isFavorite());
-        Log.d("favorite setproject ",favCheckBox.isChecked()+" " + Project.projects[projectId].isFavorite());
+        titleTextView.setText(Project.projects.get(projectId).getTitle());
+        summaryTextView.setText(Project.projects.get(projectId).getSummary());
+        favCheckBox.setChecked(Project.projects.get(projectId).isFavorite());
+        Log.d("favorite setproject ",favCheckBox.isChecked()+" "
+                + Project.projects.get(projectId).isFavorite());
 
     }
 

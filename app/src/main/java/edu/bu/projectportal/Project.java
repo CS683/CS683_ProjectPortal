@@ -3,16 +3,20 @@ package edu.bu.projectportal;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 //This is a simple POJO (Pure Old Java Object) model class
 public class Project {
 
-    public final static Project[] projects = {
+    public static List<Project> projects =
+            new ArrayList<Project>(Arrays.asList(
             new Project("Weather Forecast", "Weather Forcast is an app ..."),
             new Project ("Connect Me", "Connect Me is an app ... "),
             new Project("What to Eat", "What to Eat is an app ..."),
-            new Project ("Project Portal", "Project Portal is an app ...")
-    };
+            new Project ("Project Portal", "Project Portal is an app ...")));
 
 
     private String title;

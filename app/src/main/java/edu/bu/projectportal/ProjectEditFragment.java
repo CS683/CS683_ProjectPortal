@@ -48,8 +48,8 @@ public class ProjectEditFragment extends Fragment {
                 // for the correct project, we need to call the method in the parent activity
                 // The parent activity will implement this edit() method to switch back to the
                 // Project Detail fragment from Project Edit fragment
-                Project.projects[projectId].setTitle(titleEditText.getText().toString());
-                Project.projects[projectId].setSummary(summaryEditText.getText().toString());
+                Project.projects.get(projectId).setTitle(titleEditText.getText().toString());
+                Project.projects.get(projectId).setSummary(summaryEditText.getText().toString());
                 ((EditFragmentInterface) (view.getContext())).edit(projectId, true);
             }
         });
@@ -62,8 +62,8 @@ public class ProjectEditFragment extends Fragment {
 
     public void setProject(int projId) {
         projectId = projId;
-        titleEditText.setText(Project.projects[projectId].getTitle());
-        summaryEditText.setText(Project.projects[projectId].getSummary());
+        titleEditText.setText(Project.projects.get(projectId).getTitle());
+        summaryEditText.setText(Project.projects.get(projectId).getSummary());
     }
 
 }

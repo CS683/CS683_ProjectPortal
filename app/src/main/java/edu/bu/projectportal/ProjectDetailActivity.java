@@ -48,7 +48,7 @@ public class ProjectDetailActivity extends AppCompatActivity implements EditFrag
         if (projectDetailFragment!= null &&
                 projectDetailFragment.isVisible()) {
             int id = projectDetailFragment.getProjectId();
-            projectDetailFragment.setProject((id + 1) % Project.projects.length);
+            projectDetailFragment.setProject((id + 1) % Project.projects.size());
         }
     }
 

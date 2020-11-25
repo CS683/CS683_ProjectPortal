@@ -1,0 +1,51 @@
+package edu.bu.projectportal;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+//import edu.bu.projectportal.database.ProjectDao;
+
+public class AddProjectActivity extends AppCompatActivity {
+  //  ProjectDao projectDao;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_project);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+    }
+
+    public void onClickSubmit(View view){
+
+        EditText titleEditView =  findViewById(R.id.titleEditTextId);
+        String title = titleEditView.getText().toString();
+
+        EditText descEditView= findViewById(R.id.descEditTextId);
+        String summary = descEditView.getText().toString();
+
+        Project.projects.add(new Project(title,summary));
+        // ProjectDao projectDao = ProjectDao.getInstance(getApplicationContext());
+        // projectDao.insertProject(new Project(title, summary));
+    //    FireBaseHelper.getInstance ().addProject (new Project(title, summary));
+
+        Intent intent = new Intent(this, ProjectsListActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickCancel(View v){
+        Intent intent = new Intent(this, ProjectsListActivity.class);
+        startActivity(intent);
+    }
+
+
+}
