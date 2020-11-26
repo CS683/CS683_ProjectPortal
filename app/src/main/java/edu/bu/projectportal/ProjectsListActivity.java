@@ -62,7 +62,7 @@ public class ProjectsListActivity extends AppCompatActivity
     // when an item in the recycler view is clicked.
 
     @Override
-    public void onItemClick(int projectId) {
+    public void onItemClick(long projectId, int position) {
 
         // This case is for the devices with the smaller screen.
         // In this case, this activity only has one fragment, list fragment.
@@ -73,6 +73,7 @@ public class ProjectsListActivity extends AppCompatActivity
             Intent intent = new Intent(this, ProjectDetailActivity.class);
             // pass the project id through the extra field in the intent
             intent.putExtra("ProjectId", projectId);
+            intent.putExtra("position", position);
             // send the intent to the receiving activity
             this.startActivity(intent);
 
@@ -84,7 +85,8 @@ public class ProjectsListActivity extends AppCompatActivity
         // we can simply call the setProject() method defined in
         // the detail fragment.
         else
-            projectDetailFragment.setProject(projectId);
+            projectDetailFragment.setProject(position);
+
 
     }
 
@@ -92,7 +94,7 @@ public class ProjectsListActivity extends AppCompatActivity
     // defined in the Interface EditFragmentInterface,
     // which is required for the activity to contain the detail
     // fragment and the edit fragment
-    public void edit(int projectId, boolean done){
+    public void edit(int position, boolean done){
         FragmentManager fragManager = getSupportFragmentManager();
         // get the reference to the FragmentTransaction object
         FragmentTransaction transaction = fragManager.beginTransaction();
@@ -103,7 +105,7 @@ public class ProjectsListActivity extends AppCompatActivity
             transaction.replace(R.id.proDetailEditfragContainer, projectEditFragment);
             transaction.commitNow();
             // pass the project Id to the edit fragment
-            projectEditFragment.setProject(projectId);
+            projectEditFragment.setProject(position);
         }
         else {
             // This case is to switch back to the detail fragment
@@ -112,13 +114,41 @@ public class ProjectsListActivity extends AppCompatActivity
             transaction.replace(R.id.proDetailEditfragContainer, projectDetailFragment);
             transaction.commitNow();
             // pass the project Id to the detail fragment
-            projectDetailFragment.setProject(projectId);
+            projectDetailFragment.setProject(position);
             ProjectsListFragment projectListFragment =
                     (ProjectsListFragment)fragManager.findFragmentById(R.id.listfragment);
             projectListFragment.updateUI();
 
         }
     }
+
+    // This method implements the del() method
+    // defined in the Interface EditFragmentInterface,
+    // which is required for the activity to contain the detail
+    // fragment and the edit fragment
+    public void del(int position){
+        Project project = Project.projects.get(position);
+        // show next project
+        if (projectDetailFragment!= null &&
+                projectDetailFragment.isVisible()) {
+            int id = projectDetailFragment.getProjectPos();
+            projectDetailFragment.setProject((position + 1) % Project.projects.size());
+        }
+        //delete from the list
+        Project.projects.remove(position);
+
+        // delete from the database
+        // update the database
+        ProjectPortalDatabase
+                .getInstance(this.getApplicationContext())
+                .projectDao().delete(project);
+
+       // update the list fragment UI
+        ProjectsListFragment projectListFragment =
+                (ProjectsListFragment)getSupportFragmentManager().findFragmentById(R.id.listfragment);
+        projectListFragment.updateUI();
+    }
+
 
 
 }
