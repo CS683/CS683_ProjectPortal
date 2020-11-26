@@ -17,7 +17,7 @@ public class ProjectDetailFragment extends Fragment {
 
     private final static String TAG = ProjectDetailFragment.class.getSimpleName ();
 
-    private int projectId = 0;
+    private int position = 0;
     private TextView titleTextView, summaryTextView;
     private CheckBox favCheckBox;
 
@@ -38,20 +38,25 @@ public class ProjectDetailFragment extends Fragment {
         favCheckBox = view.findViewById(R.id.projFavoriteCheckbox);
 
         //get the project Id from the argument passed to this fragment
-        projectId = 0;
+        position = 0;
         if (getArguments()!= null)
-            projectId = getArguments().getInt("ProjectId");
+            position = getArguments().getInt("position");
 
 
-        Log.d(TAG, " Project Id: " + projectId);
-        setProject(projectId);
+        Log.d(TAG, " Project position: " + position);
+        setProject(position);
 
         // When this checkbox is clicked, the project is marked as the
         // favorite project.
         favCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isFav) {
-                Project.projects.get(projectId).setFavorite(isFav);
+                Project project = Project.projects.get(position);
+                project.setFavorite(isFav);
+                // update the database
+                ProjectPortalDatabase
+                        .getInstance(compoundButton.getContext())
+                        .projectDao().update(project);
             }
         });
 
@@ -68,25 +73,44 @@ public class ProjectDetailFragment extends Fragment {
                 // The parent activity will implement this edit() method to switch to the
                 // Project Edit fragment.
 
-                ((EditFragmentInterface) (view.getContext())).edit(projectId, false);
+                ((EditFragmentInterface) (view.getContext())).edit(position, false);
             }
         });
+
+        ImageButton delButton  = view.findViewById(R.id.delBtn);
+        delButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // To switch from the Project Detail fragment to the Project Edit fragment
+                // for the correct project, we need to call the method in the parent activity
+                // The parent activity will implement this edit() method to switch to the
+                // Project Edit fragment.
+
+                ((EditFragmentInterface) (view.getContext())).del(position);
+            }
+        });
+
+
 
         return view;
     }
 
     //make sure all fields display the correct project information
-    public void setProject(int projId) {
-        projectId = projId;
-        titleTextView.setText(Project.projects.get(projectId).getTitle());
-        summaryTextView.setText(Project.projects.get(projectId).getSummary());
-        favCheckBox.setChecked(Project.projects.get(projectId).isFavorite());
+    public void setProject(int projPos) {
+        position = projPos;
+
+        Log.d("position", ""+ position);
+
+        titleTextView.setText(Project.projects.get(position).getTitle());
+        summaryTextView.setText(Project.projects.get(position).getSummary());
+        favCheckBox.setChecked(Project.projects.get(position).isFavorite());
         Log.d("favorite setproject ",favCheckBox.isChecked()+" "
-                + Project.projects.get(projectId).isFavorite());
+                + Project.projects.get(position).isFavorite());
 
     }
 
-    public int getProjectId(){
-        return projectId;
+    public int getProjectPos(){
+        return position;
     }
 }

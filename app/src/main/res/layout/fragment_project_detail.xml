@@ -8,21 +8,34 @@
 
     <TextView
         android:id="@+id/projTitleTextViewId"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/project_title"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <ImageButton
         android:id="@+id/EditBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:src="@drawable/ic_edit"
+        app:layout_constraintStart_toEndOf="@+id/projTitleTextViewId"
+        app:layout_constraintEnd_toStartOf="@+id/delBtn"
+        app:layout_constraintTop_toTopOf="@+id/projTitleTextViewId"
+        app:layout_constraintBottom_toTopOf="@+id/projSummaryTextViewId"/>
+
+    <ImageButton
+        android:id="@+id/delBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_del"
+        app:layout_constraintStart_toEndOf="@+id/EditBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/projTitleTextViewId"
         app:layout_constraintBottom_toTopOf="@+id/projSummaryTextViewId"/>
@@ -49,7 +62,6 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

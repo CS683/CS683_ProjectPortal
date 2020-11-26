@@ -18,7 +18,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     private Listener listener;
 
     interface Listener {
-        void onItemClick(int position);
+        void onItemClick(long pid, int position);
     }
 
     public ProjectListAdapter(List<Project> projects){this.projects = projects;}
@@ -63,7 +63,6 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
                 // ((ProjectsListActivity) view.getContext()).onItemClick(position);
 
 
-
                 listener = (Listener)view.getContext();
                 // response the click event
                 // this will delegate to the parent activity
@@ -72,7 +71,9 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
                 // Project Detail fragment to display the project detail
                 // for this particular project
 
-                listener.onItemClick(position);
+                // pass both the project id and the project position to
+                // the detail or edit fragment
+                listener.onItemClick(projects.get(position).getId(),position);
             }
         });
 

@@ -1,6 +1,10 @@
 package edu.bu.projectportal;
 
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -9,18 +13,28 @@ import java.util.List;
 
 
 //This is a simple POJO (Pure Old Java Object) model class
+@Entity(tableName="projects")
 public class Project {
 
-    public static List<Project> projects =
-            new ArrayList<Project>(Arrays.asList(
-            new Project("Weather Forecast", "Weather Forcast is an app ..."),
-            new Project ("Connect Me", "Connect Me is an app ... "),
-            new Project("What to Eat", "What to Eat is an app ..."),
-            new Project ("Project Portal", "Project Portal is an app ...")));
+    //use this as cache, so don't need to query the database always
+    public static List<Project> projects = new ArrayList<>();
+//    public static List<Project> projects =
+//            new ArrayList<Project>(Arrays.asList(
+//            new Project("Weather Forecast", "Weather Forcast is an app ..."),
+//            new Project ("Connect Me", "Connect Me is an app ... "),
+//            new Project("What to Eat", "What to Eat is an app ..."),
+//            new Project ("Project Portal", "Project Portal is an app ...")));
 
+    @PrimaryKey(autoGenerate = true)
+    private long id;
 
+    @ColumnInfo(name ="project_title")
     private String title;
+
+    @ColumnInfo(name ="project_summary")
     private String summary;
+
+    @ColumnInfo(name ="project_favorite")
     private boolean favorite;
 
 
@@ -29,6 +43,14 @@ public class Project {
         this.title = title;
         this.summary = summary;
         this.favorite = false;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {

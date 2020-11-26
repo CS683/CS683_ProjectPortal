@@ -13,10 +13,9 @@ import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 
-
 public class ProjectEditFragment extends Fragment {
 
-    private int projectId = 0;
+    private int position = 0;
     private EditText titleEditText, summaryEditText;
     private CheckBox favCheckBox1;
 
@@ -31,12 +30,11 @@ public class ProjectEditFragment extends Fragment {
         summaryEditText = view.findViewById(R.id.projSummaryEditTextId);
 
         // get the project id from the argument.
-        projectId = 0;
+        position = 0;
         if (getArguments()!= null)
-            projectId = getArguments().getInt("ProjectId");
+            position = getArguments().getInt("position");
 
-        setProject(projectId);
-
+        setProject(position);
 
         Button doneButton  = view.findViewById(R.id.DoneBtnId);
 
@@ -48,22 +46,39 @@ public class ProjectEditFragment extends Fragment {
                 // for the correct project, we need to call the method in the parent activity
                 // The parent activity will implement this edit() method to switch back to the
                 // Project Detail fragment from Project Edit fragment
-                Project.projects.get(projectId).setTitle(titleEditText.getText().toString());
-                Project.projects.get(projectId).setSummary(summaryEditText.getText().toString());
-                ((EditFragmentInterface) (view.getContext())).edit(projectId, true);
+
+
+                //update project in the list
+                Project project = Project.projects.get(position);
+                project.setTitle(titleEditText.getText().toString());
+                project.setSummary(summaryEditText.getText().toString());
+
+                // update the database
+                ProjectPortalDatabase
+                        .getInstance(view.getContext())
+                        .projectDao().update(project);
+
+
+                ((EditFragmentInterface) (view.getContext()))
+                        .edit(position, true);
             }
         });
-
-
 
         return view;
 
     }
 
-    public void setProject(int projId) {
-        projectId = projId;
-        titleEditText.setText(Project.projects.get(projectId).getTitle());
-        summaryEditText.setText(Project.projects.get(projectId).getSummary());
+    public void setProject(int projPos) {
+        position = projPos;
+        Project project = Project.projects.get(position);
+        // if we use project id instead of position
+//        Project project = ProjectPortalDatabase
+//                .getInstance(this.getContext())
+//                .projectDao().findById(projectId);
+        if (project != null) {
+            titleEditText.setText(project.getTitle());
+            summaryEditText.setText(project.getSummary());
+        }
     }
 
 }
