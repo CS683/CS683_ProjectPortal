@@ -1,4 +1,4 @@
-package edu.bu.projectportal;
+package edu.bu.projectportal.UI;
 
 
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
+
+import edu.bu.projectportal.database.Project;
+import edu.bu.projectportal.database.ProjectPortalDatabase;
+import edu.bu.projectportal.R;
 
 public class ProjectDetailActivity extends AppCompatActivity implements EditFragmentInterface {
 

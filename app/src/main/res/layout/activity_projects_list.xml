@@ -4,12 +4,12 @@
     android:id="@+id/fragframe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.bu.projectportal.ProjectsListActivity"
+    tools:context="edu.bu.projectportal.UI.ProjectsListActivity"
     android:orientation="vertical">
 
     <fragment
         android:id="@+id/listfragment"
-        android:name="edu.bu.projectportal.ProjectsListFragment"
+        android:name="edu.bu.projectportal.UI.ProjectsListFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

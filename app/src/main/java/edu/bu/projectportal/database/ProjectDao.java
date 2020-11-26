@@ -1,4 +1,4 @@
-package edu.bu.projectportal;
+package edu.bu.projectportal.database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -8,6 +8,9 @@ import androidx.room.Update;
 
 import java.util.List;
 
+/** use @Dao to create a Dao interface to contain all methods used
+ for accessing the database
+ */
 @Dao
 public interface ProjectDao {
     @Query("SELECT * FROM projects")

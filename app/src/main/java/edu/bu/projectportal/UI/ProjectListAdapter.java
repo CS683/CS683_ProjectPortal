@@ -1,6 +1,5 @@
-package edu.bu.projectportal;
+package edu.bu.projectportal.UI;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import edu.bu.projectportal.database.Project;
+import edu.bu.projectportal.R;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ProjectListViewHolder>{
     private List<Project> projects;

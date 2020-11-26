@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.bu.projectportal.ProjectDetailFragment">
+    tools:context="edu.bu.projectportal.UI.ProjectDetailFragment">
 
     <TextView
         android:id="@+id/projTitleTextViewId"

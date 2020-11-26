@@ -1,4 +1,4 @@
-package edu.bu.projectportal;
+package edu.bu.projectportal.UI;
 
 
 import android.os.Bundle;
@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import edu.bu.projectportal.database.Project;
+import edu.bu.projectportal.database.ProjectPortalDatabase;
+import edu.bu.projectportal.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProjectsListFragment extends Fragment {
 
     private ProjectListAdapter projectListAdapter;

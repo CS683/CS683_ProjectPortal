@@ -1,17 +1,20 @@
-package edu.bu.projectportal;
+package edu.bu.projectportal.UI;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import edu.bu.projectportal.database.Project;
+import edu.bu.projectportal.database.ProjectPortalDatabase;
+import edu.bu.projectportal.R;
 
 public class ProjectDetailFragment extends Fragment {
 

@@ -1,22 +1,21 @@
-package edu.bu.projectportal;
-import java.util.Date;
+package edu.bu.projectportal.UI;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.w3c.dom.Text;
+import edu.bu.projectportal.database.Project;
+import edu.bu.projectportal.database.ProjectPortalDatabase;
+import edu.bu.projectportal.R;
 
 public class ProjectsListActivity extends AppCompatActivity
-        implements ProjectListAdapter.Listener, EditFragmentInterface{
+        implements ProjectListAdapter.Listener, EditFragmentInterface {
 
     ProjectDetailFragment projectDetailFragment;
     ProjectEditFragment projectEditFragment;

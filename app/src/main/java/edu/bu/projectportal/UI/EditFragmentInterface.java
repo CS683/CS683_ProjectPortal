@@ -1,4 +1,4 @@
-package edu.bu.projectportal;
+package edu.bu.projectportal.UI;
 
 
 // This interface is used to define a method

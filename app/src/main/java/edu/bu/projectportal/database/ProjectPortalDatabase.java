@@ -1,4 +1,4 @@
-package edu.bu.projectportal;
+package edu.bu.projectportal.database;
 
 import android.content.Context;
 
@@ -6,15 +6,19 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+/**
+ * Build the database and list all daos
+ */
 @Database(entities = {Project.class}, version = 1, exportSchema = false)
 public abstract class ProjectPortalDatabase extends RoomDatabase {
 
-    //    singleton instance of Database
+    // singleton instance of Database
     private static ProjectPortalDatabase INSTANCE;
 
     public static synchronized ProjectPortalDatabase getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context, ProjectPortalDatabase.class, "project_portal_database")
+            INSTANCE = Room.databaseBuilder(context, ProjectPortalDatabase.class,
+                    "project_portal_database")
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     .allowMainThreadQueries()
                     .build();
